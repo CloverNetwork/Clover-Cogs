@@ -1,0 +1,16 @@
+{
+    "author": [
+        "BlackDev"
+    ],
+    "min_bot_version": "3.5.0",
+    "description": "Tracks a Minecraft Java server and posts a live-updating status embed with MOTD colors, icon, player count, and version.",
+    "short": "Live Minecraft server status embed.",
+    "tags": [
+        "minecraft",
+        "utility"
+    ],
+    "requirements": [
+        "mcstatus>=11.1.1,<12"
+    ],
+    "end_user_data_statement": "This cog does not store any end user data. It only stores server-wide configuration (server address, channel, and update interval) set by server admins."
+}

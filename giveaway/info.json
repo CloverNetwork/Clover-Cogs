@@ -1,0 +1,14 @@
+{
+    "author": [
+        "BlackDev"
+    ],
+    "min_bot_version": "3.5.0",
+    "description": "Run giveaways with entry reactions, automatic winner selection, and rerolls.",
+    "short": "Giveaway cog with rerolls and embeds.",
+    "tags": [
+        "giveaway",
+        "fun",
+        "utility"
+    ],
+    "end_user_data_statement": "This cog stores giveaway entrant reactions temporarily while a giveaway is active. No data is retained after a giveaway ends and is rerolled or cleared."
+}
