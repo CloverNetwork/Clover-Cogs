@@ -16,28 +16,28 @@ Replace `[p]` with your bot's prefix.
 
 ### Giveaway
 
-Run giveaways with entry reactions, automatic winner selection, rerolls, and embeds.
+Run giveaways with entry reactions, automatic winner selection, rerolls, and embeds. All commands below work both as text commands and as slash commands (`/giveaway ...`).
 
 | Command | Description |
 |---|---|
-| `[p]giveaway start <duration> <winners> <prize>` | Start a giveaway. Duration accepts a combination like `1d2h30m`, `45m`, or `30s`. |
+| `[p]giveaway start <duration> <winners> <prize> [role]` | Start a giveaway. Duration accepts a combination like `1d2h30m`, `45m`, or `30s`. Pass a role to restrict winners to members who have it. Quote the prize with the text command if it has spaces (not needed with the slash command). |
 | `[p]giveaway end <message_id>` | End a giveaway early and pick winners. |
 | `[p]giveaway reroll <message_id> [winners]` | Pick new winner(s) from an ended giveaway's entrants. |
 | `[p]giveaway list` | List all active giveaways in the server. |
 
-Users enter by reacting to the giveaway embed with 🎉. Starting and ending giveaways requires Manage Server permission (or bot admin).
+Users enter by reacting to the giveaway embed with 🎉. If a giveaway requires a role, members without it can still react but won't be picked as winners. Starting and ending giveaways requires Manage Server permission (or bot admin).
 
 **Example**
 
 ```
-[p]giveaway start 1h30m 2 Nitro Classic
+[p]giveaway start 1h30m 2 "Nitro Classic"
 ```
 
-Starts a giveaway for 2 winners of "Nitro Classic" that ends in 1 hour and 30 minutes.
+or as a slash command: `/giveaway start duration:1h30m winners:2 prize:Nitro Classic`. Starts a giveaway for 2 winners of "Nitro Classic" that ends in 1 hour and 30 minutes.
 
 ### Minecraft Status
 
-Tracks a Minecraft Java server and posts a live-updating status embed with a colored MOTD, server icon, player count/sample, version, and latency.
+Tracks a Minecraft Java server and posts a live-updating status embed with a colored MOTD, server icon, player count/sample, version, and latency. All commands below work both as text commands and as slash commands (`/mcserver ...`).
 
 | Command | Description |
 |---|---|

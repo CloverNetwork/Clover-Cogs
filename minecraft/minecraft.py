@@ -2,8 +2,10 @@ import base64
 import io
 import re
 import time
+from typing import Optional
 
 import discord
+from discord import app_commands
 from discord.ext import tasks
 from mcstatus import JavaServer
 from redbot.core import Config, commands
@@ -174,20 +176,22 @@ class MinecraftStatus(commands.Cog):
 
         await self.config.guild(guild).last_updated.set(time.time())
 
-    @commands.group(invoke_without_command=True)
+    @commands.hybrid_group(invoke_without_command=True, fallback="help")
     @commands.guild_only()
     async def mcserver(self, ctx):
         await ctx.send_help()
 
     @mcserver.command(name="address")
     @commands.admin_or_permissions(manage_guild=True)
+    @app_commands.describe(address="The server's address, e.g. play.example.com or 1.2.3.4:25565")
     async def mcserver_address(self, ctx, address: str):
         await self.config.guild(ctx.guild).address.set(address)
         await ctx.send(f"Minecraft server address set to `{address}`.")
 
     @mcserver.command(name="channel")
     @commands.admin_or_permissions(manage_guild=True)
-    async def mcserver_channel(self, ctx, channel: discord.TextChannel = None):
+    @app_commands.describe(channel="Channel to post the live status embed in (defaults to this channel)")
+    async def mcserver_channel(self, ctx, channel: Optional[discord.TextChannel] = None):
         address = await self.config.guild(ctx.guild).address()
         if not address:
             await ctx.send("Set a server address first with `[p]mcserver address <ip>`.")
@@ -200,6 +204,7 @@ class MinecraftStatus(commands.Cog):
 
     @mcserver.command(name="interval")
     @commands.admin_or_permissions(manage_guild=True)
+    @app_commands.describe(seconds="How often to refresh the live embed, in seconds (minimum 60)")
     async def mcserver_interval(self, ctx, seconds: int):
         if seconds < 60:
             await ctx.send("Interval must be at least 60 seconds.")
@@ -225,7 +230,8 @@ class MinecraftStatus(commands.Cog):
         await ctx.send("Automatic status updates have been disabled.")
 
     @mcserver.command(name="status")
-    async def mcserver_status(self, ctx, address: str = None):
+    @app_commands.describe(address="Check a specific address instead of the configured server")
+    async def mcserver_status(self, ctx, address: Optional[str] = None):
         address = address or await self.config.guild(ctx.guild).address()
         if not address:
             await ctx.send("No server address configured. Provide one or set it with `[p]mcserver address <ip>`.")
